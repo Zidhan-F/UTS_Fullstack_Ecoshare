@@ -11,7 +11,7 @@ const toast = useToastStore()
 const name = ref('')
 const email = ref('')
 const password = ref('')
-const role = ref('')
+const role = ref('renter')
 const formError = ref('')
 
 async function handleRegister() {
@@ -30,7 +30,7 @@ async function handleRegister() {
   const result = await authStore.register(name.value, email.value, password.value, role.value)
 
   if (result.success) {
-    toast.show('Registrasi berhasil! Silakan login. 🎉', 'success')
+    toast.show('Registrasi berhasil! Silakan login.', 'success')
     router.push('/login')
   } else {
     formError.value = result.message
@@ -53,7 +53,6 @@ async function handleRegister() {
         <h2 class="auth-title">Buat Akun Baru</h2>
 
         <div v-if="formError" class="alert alert-error animate-fade-in">
-          <span class="alert-icon">❌</span>
           {{ formError }}
         </div>
 
@@ -103,9 +102,7 @@ async function handleRegister() {
             >
               <input type="radio" v-model="role" value="owner" class="role-radio" />
               <div class="role-content">
-                <span class="role-icon">🏪</span>
                 <span class="role-label">Owner</span>
-                <span class="role-desc">Sewakan barang elektronik Anda</span>
               </div>
             </label>
             <label
@@ -115,9 +112,7 @@ async function handleRegister() {
             >
               <input type="radio" v-model="role" value="renter" class="role-radio" />
               <div class="role-content">
-                <span class="role-icon">🛒</span>
                 <span class="role-label">Renter</span>
-                <span class="role-desc">Sewa barang yang Anda butuhkan</span>
               </div>
             </label>
           </div>
@@ -130,7 +125,7 @@ async function handleRegister() {
           id="btn-register"
         >
           <span v-if="authStore.loading" class="btn-spinner"></span>
-          {{ authStore.loading ? 'Memproses...' : '🚀 Daftar Sekarang' }}
+          {{ authStore.loading ? 'Memproses...' : 'Daftar Sekarang' }}
         </button>
       </form>
 
@@ -266,6 +261,20 @@ async function handleRegister() {
   border-color: var(--color-accent);
   background: var(--color-accent-glow);
   box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+}
+
+.role-option-disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.role-option-disabled:hover .role-content {
+  border-color: var(--color-border);
+}
+
+.role-option-disabled .role-content {
+  background: var(--color-bg-primary);
+  border-style: dashed;
 }
 
 .role-icon {

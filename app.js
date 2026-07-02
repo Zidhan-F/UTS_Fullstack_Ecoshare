@@ -5,6 +5,7 @@ const { globalErrorHandler } = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authRoutes');
 const itemRoutes = require('./routes/itemRoutes');
 const rentalRoutes = require('./routes/rentalRoutes');
+const adminRoutes = require('./routes/adminRoutes');
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/rentals', rentalRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Global Error Handler (Harus paling bawah)
 app.use(globalErrorHandler);

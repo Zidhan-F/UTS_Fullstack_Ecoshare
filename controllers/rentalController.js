@@ -1,5 +1,21 @@
 const rentalService = require('../services/rentalService');
 
+exports.getMyRentals = async (req, res, next) => {
+    try {
+        const userId = req.user.id;
+        const userRole = req.user.role;
+
+        const rentals = await rentalService.getRentalsByUser(userId, userRole);
+        
+        res.status(200).json({
+            success: true,
+            data: rentals
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 exports.create = async (req, res, next) => {
     try {
         const renterId = req.user.id;

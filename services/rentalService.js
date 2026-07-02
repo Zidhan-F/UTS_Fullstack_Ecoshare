@@ -1,6 +1,40 @@
 const db = require('../config/db');
 const CustomError = require('../utils/customError');
 
+/**
+ * Ambil daftar rental berdasarkan user role
+ * Owner: melihat rental dari barang miliknya
+ * Renter: melihat rental yang dia buat
+ */
+exports.getRentalsByUser = async (userId, role) => {
+    let query;
+    let params;
+
+    if (role === 'owner') {
+        query = `
+            SELECT r.*, i.name AS item_name, u.name AS renter_name
+            FROM rentals r
+            JOIN items i ON r.item_id = i.id
+            JOIN users u ON r.renter_id = u.id
+            WHERE i.owner_id = ?
+            ORDER BY r.created_at DESC
+        `;
+        params = [userId];
+    } else {
+        query = `
+            SELECT r.*, i.name AS item_name
+            FROM rentals r
+            JOIN items i ON r.item_id = i.id
+            WHERE r.renter_id = ?
+            ORDER BY r.created_at DESC
+        `;
+        params = [userId];
+    }
+
+    const [rows] = await db.execute(query, params);
+    return rows;
+};
+
 exports.createRental = async (renterId, itemId, startDate, endDate) => {
     const connection = await db.getConnection();
 

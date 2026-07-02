@@ -8,6 +8,7 @@ import ItemsView from '@/views/ItemsView.vue'
 import CreateItemView from '@/views/CreateItemView.vue'
 import RentalsView from '@/views/RentalsView.vue'
 import CreateRentalView from '@/views/CreateRentalView.vue'
+import AdminUsersView from '@/views/AdminUsersView.vue'
 
 const routes = [
   {
@@ -58,6 +59,12 @@ const routes = [
     props: true
   },
   {
+    path: '/admin/users',
+    name: 'AdminUsers',
+    component: AdminUsersView,
+    meta: { requiresAuth: true, requiresRole: 'admin' }
+  },
+  {
     path: '/:pathMatch(.*)*',
     redirect: '/dashboard'
   }
@@ -82,10 +89,10 @@ router.beforeEach((to, from, next) => {
     return next('/dashboard')
   }
 
-  // Route memerlukan role tertentu
+  // Route memerlukan role tertentu (Admin bisa mengakses semua role)
   if (to.meta.requiresRole) {
     const userRole = authStore.user?.role
-    if (userRole !== to.meta.requiresRole) {
+    if (userRole !== to.meta.requiresRole && userRole !== 'admin') {
       return next('/dashboard')
     }
   }

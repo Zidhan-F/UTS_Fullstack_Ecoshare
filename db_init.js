@@ -24,11 +24,24 @@ const initDB = async () => {
         name VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password_hash VARCHAR(255) NOT NULL,
-        role ENUM('owner', 'renter') NOT NULL,
+        role ENUM('admin', 'owner', 'renter') NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       ) ENGINE=InnoDB;
     `);
     console.log('Users table created.');
+
+    // Seed default admin if not exists
+    const bcrypt = require('bcryptjs');
+    const adminEmail = 'admin@ecoshare.com';
+    const [existingAdmin] = await connection.execute('SELECT * FROM users WHERE email = ?', [adminEmail]);
+    if (existingAdmin.length === 0) {
+      const passwordHash = await bcrypt.hash('password123', 10);
+      await connection.execute(
+        'INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)',
+        ['System Admin', adminEmail, passwordHash, 'admin']
+      );
+      console.log('Default admin user seeded.');
+    }
 
     // Create Items Table
     await connection.execute(`

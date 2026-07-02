@@ -24,7 +24,7 @@ async function handleLogin() {
   const result = await authStore.login(email.value, password.value)
 
   if (result.success) {
-    toast.show(`Selamat datang, ${authStore.userName}! 👋`, 'success')
+    toast.show(`Selamat datang, ${authStore.userName}!`, 'success')
     const redirect = route.query.redirect || '/dashboard'
     router.push(redirect)
   } else {
@@ -48,7 +48,6 @@ async function handleLogin() {
         <h2 class="auth-title">Masuk ke Akun Anda</h2>
 
         <div v-if="formError" class="alert alert-error animate-fade-in">
-          <span class="alert-icon">❌</span>
           {{ formError }}
         </div>
 
@@ -83,7 +82,7 @@ async function handleLogin() {
           id="btn-login"
         >
           <span v-if="authStore.loading" class="btn-spinner"></span>
-          {{ authStore.loading ? 'Memproses...' : '🔐 Masuk' }}
+          {{ authStore.loading ? 'Memproses...' : 'Masuk' }}
         </button>
       </form>
 

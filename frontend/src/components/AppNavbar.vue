@@ -33,20 +33,19 @@ function closeMobileMenu() {
       <!-- Desktop Navigation -->
       <div class="navbar-links" :class="{ 'is-open': mobileMenuOpen }">
         <router-link to="/dashboard" class="nav-link" active-class="nav-link-active" @click="closeMobileMenu">
-          <span class="nav-icon">📊</span>
           Dashboard
         </router-link>
         <router-link to="/items" class="nav-link" active-class="nav-link-active" @click="closeMobileMenu">
-          <span class="nav-icon">📦</span>
           Barang
         </router-link>
-        <router-link v-if="authStore.isOwner" to="/items/create" class="nav-link" active-class="nav-link-active" @click="closeMobileMenu">
-          <span class="nav-icon">➕</span>
+        <router-link v-if="authStore.isOwner || authStore.isAdmin" to="/items/create" class="nav-link" active-class="nav-link-active" @click="closeMobileMenu">
           Tambah Barang
         </router-link>
         <router-link to="/rentals" class="nav-link" active-class="nav-link-active" @click="closeMobileMenu">
-          <span class="nav-icon">📋</span>
           Penyewaan
+        </router-link>
+        <router-link v-if="authStore.isAdmin" to="/admin/users" class="nav-link" active-class="nav-link-active" @click="closeMobileMenu">
+          Kelola User
         </router-link>
       </div>
 
@@ -54,12 +53,12 @@ function closeMobileMenu() {
       <div class="navbar-user">
         <div class="user-info">
           <span class="user-name">{{ authStore.userName }}</span>
-          <span class="user-role badge" :class="authStore.isOwner ? 'badge-info' : 'badge-success'">
+          <span class="user-role badge" :class="authStore.isAdmin ? 'badge-danger' : authStore.isOwner ? 'badge-info' : 'badge-success'">
             {{ authStore.userRole }}
           </span>
         </div>
         <button class="btn btn-ghost btn-sm" @click="handleLogout" id="btn-logout">
-          🚪 Logout
+          Logout
         </button>
       </div>
 
@@ -80,7 +79,7 @@ function closeMobileMenu() {
 
 <style scoped>
 .navbar {
-  background: rgba(13, 17, 23, 0.95);
+  background: rgba(255, 255, 255, 0.95);
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(20px);
   position: sticky;
@@ -141,7 +140,7 @@ function closeMobileMenu() {
 
 .nav-link:hover {
   color: var(--color-text-primary);
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .nav-link-active {

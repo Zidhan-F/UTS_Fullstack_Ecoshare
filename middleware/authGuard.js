@@ -19,7 +19,7 @@ exports.verifyToken = (req, res, next) => {
 
 exports.requireRole = (role) => {
     return (req, res, next) => {
-        if (req.user.role !== role) {
+        if (req.user.role !== role && req.user.role !== 'admin') {
             return next(new CustomError(`Akses ditolak. Membutuhkan role: ${role}`, 403));
         }
         next();

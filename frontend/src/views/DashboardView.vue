@@ -50,7 +50,7 @@ onMounted(async () => {
       <!-- Welcome Section -->
       <div class="welcome-section animate-fade-in-up">
         <div class="welcome-text">
-          <p class="welcome-greeting">{{ greeting }} 👋</p>
+          <p class="welcome-greeting">{{ greeting }}</p>
           <h1 class="welcome-name">{{ authStore.userName }}</h1>
           <p class="welcome-role">
             Anda login sebagai
@@ -58,9 +58,6 @@ onMounted(async () => {
               {{ authStore.userRole }}
             </span>
           </p>
-        </div>
-        <div class="welcome-decoration">
-          <span class="welcome-emoji">{{ authStore.isOwner ? '🏪' : '🛒' }}</span>
         </div>
       </div>
 
@@ -70,21 +67,18 @@ onMounted(async () => {
         <!-- Stats Cards -->
         <div class="stats-grid stagger-children">
           <div class="stat-card card animate-fade-in-up">
-            <div class="stat-icon stat-icon-items">📦</div>
             <div class="stat-info">
               <span class="stat-value">{{ stats.totalItems }}</span>
               <span class="stat-label">Barang Tersedia</span>
             </div>
           </div>
           <div class="stat-card card animate-fade-in-up">
-            <div class="stat-icon stat-icon-rentals">📋</div>
             <div class="stat-info">
               <span class="stat-value">{{ stats.totalRentals }}</span>
               <span class="stat-label">Total Penyewaan</span>
             </div>
           </div>
           <div class="stat-card card animate-fade-in-up">
-            <div class="stat-icon stat-icon-active">⚡</div>
             <div class="stat-info">
               <span class="stat-value">{{ stats.activeRentals }}</span>
               <span class="stat-label">Sedang Aktif</span>
@@ -99,17 +93,14 @@ onMounted(async () => {
             <!-- Owner Actions -->
             <template v-if="authStore.isOwner">
               <router-link to="/items/create" class="action-card" id="action-create-item">
-                <span class="action-icon">➕</span>
                 <span class="action-title">Tambah Barang</span>
                 <span class="action-desc">Sewakan barang elektronik Anda</span>
               </router-link>
               <router-link to="/items" class="action-card" id="action-view-items">
-                <span class="action-icon">📦</span>
                 <span class="action-title">Lihat Barang</span>
                 <span class="action-desc">Kelola daftar barang Anda</span>
               </router-link>
               <router-link to="/rentals" class="action-card" id="action-manage-rentals">
-                <span class="action-icon">✅</span>
                 <span class="action-title">Kelola Penyewaan</span>
                 <span class="action-desc">Konfirmasi pengembalian barang</span>
               </router-link>
@@ -118,12 +109,10 @@ onMounted(async () => {
             <!-- Renter Actions -->
             <template v-if="authStore.isRenter">
               <router-link to="/items" class="action-card" id="action-browse-items">
-                <span class="action-icon">🔍</span>
                 <span class="action-title">Cari Barang</span>
                 <span class="action-desc">Temukan barang yang Anda butuhkan</span>
               </router-link>
               <router-link to="/rentals" class="action-card" id="action-my-rentals">
-                <span class="action-icon">📋</span>
                 <span class="action-title">Penyewaan Saya</span>
                 <span class="action-desc">Lihat riwayat penyewaan Anda</span>
               </router-link>

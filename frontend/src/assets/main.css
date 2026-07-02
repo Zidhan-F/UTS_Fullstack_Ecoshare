@@ -6,16 +6,16 @@
 /* === CSS Custom Properties (Design Tokens) === */
 :root {
   /* Colors */
-  --color-bg-primary: #0d1117;
-  --color-bg-secondary: #161b22;
-  --color-bg-tertiary: #1c2333;
-  --color-bg-card: rgba(22, 27, 34, 0.8);
-  --color-bg-glass: rgba(22, 27, 34, 0.6);
+  --color-bg-primary: #f8f9fa;
+  --color-bg-secondary: #ffffff;
+  --color-bg-tertiary: #f1f3f5;
+  --color-bg-card: rgba(255, 255, 255, 0.95);
+  --color-bg-glass: rgba(255, 255, 255, 0.8);
 
   --color-accent: #10b981;
   --color-accent-hover: #059669;
-  --color-accent-glow: rgba(16, 185, 129, 0.15);
-  --color-accent-light: #34d399;
+  --color-accent-glow: rgba(16, 185, 129, 0.1);
+  --color-accent-light: #059669;
 
   --color-danger: #ef4444;
   --color-danger-hover: #dc2626;
@@ -23,12 +23,12 @@
   --color-info: #3b82f6;
   --color-success: #10b981;
 
-  --color-text-primary: #e6edf3;
-  --color-text-secondary: #8b949e;
-  --color-text-muted: #484f58;
+  --color-text-primary: #212529;
+  --color-text-secondary: #495057;
+  --color-text-muted: #6c757d;
 
-  --color-border: rgba(48, 54, 61, 0.6);
-  --color-border-hover: rgba(16, 185, 129, 0.3);
+  --color-border: #dee2e6;
+  --color-border-hover: rgba(16, 185, 129, 0.5);
 
   /* Typography */
   --font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -69,11 +69,11 @@
   --radius-full: 9999px;
 
   /* Shadows */
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.4);
-  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.15);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
+  --shadow-xl: 0 20px 50px rgba(0, 0, 0, 0.1);
+  --shadow-glow: 0 0 20px rgba(16, 185, 129, 0.08);
 
   /* Transitions */
   --transition-fast: 150ms ease;

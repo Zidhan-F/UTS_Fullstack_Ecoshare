@@ -32,3 +32,19 @@ exports.getAllAvailable = async (req, res, next) => {
         next(error);
     }
 };
+
+exports.delete = async (req, res, next) => {
+    try {
+        const ownerId = req.user.id;
+        const itemId = parseInt(req.params.id);
+
+        const result = await itemService.deleteItem(ownerId, itemId);
+        
+        res.status(200).json({
+            success: true,
+            data: result
+        });
+    } catch (error) {
+        next(error);
+    }
+};
