@@ -87,11 +87,12 @@ function formatPrice(price) {
 }
 
 .item-price-tag {
-  text-align: right;
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-1);
 }
 
 .price-amount {
-  display: block;
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
   color: var(--color-accent-light);
